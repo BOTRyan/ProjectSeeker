@@ -3,12 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - CinemachineTarget
+  - Hider
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Hider
   - Water
   - UI
   - 
