@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 
-namespace StarterAssets {
+namespace StarterAssets
+{
     public class SeekerScan : MonoBehaviour
     {
         private GameObject target;
@@ -16,12 +17,12 @@ namespace StarterAssets {
         [SerializeField] private Image uiReticle;
 
         private StarterAssetsInputs input;
-        private Camera MainCamera; 
+        private Camera MainCamera;
 
 
         private void Start()
         {
-           input = GetComponent<StarterAssetsInputs>();
+            input = GetComponent<StarterAssetsInputs>();
             MainCamera = Camera.main;
         }
         void Update()

@@ -43,9 +43,18 @@
                 },
                 {
                     "name": "Scan",
-                    "type": "PassThrough",
-                    "id": "5df80854-74c4-4e83-a7f5-1c26e897f84b",
-                    "expectedControlType": "",
+                    "type": "Button",
+                    "id": "9f168cb8-75d2-4fe6-abac-d8268b044c0f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "2046e9bf-43d8-4f44-a42a-c99851330595",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -230,12 +239,23 @@
                 },
                 {
                     "name": "",
-                    "id": "dd16b2b7-47d3-469a-b304-7c77094d757a",
+                    "id": "64c8605b-e1fd-4c3c-a0d2-a64e51168e9f",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Scan",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6a000d1-ac0e-49e0-9a6a-8130a7a45594",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
