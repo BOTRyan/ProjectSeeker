@@ -43,12 +43,12 @@
                 },
                 {
                     "name": "Scan",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "9f168cb8-75d2-4fe6-abac-d8268b044c0f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Interact",

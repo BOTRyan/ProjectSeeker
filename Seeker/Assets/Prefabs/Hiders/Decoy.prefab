@@ -2146,8 +2146,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6982512075564559838}
   - component: {fileID: 3893064358407403428}
+  - component: {fileID: 6593162227001880182}
   m_Layer: 8
-  m_Name: FakeHider
+  m_Name: Decoy
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2191,6 +2192,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6593162227001880182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7758872096563197796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395e4e9cf13d46641b3863298c2c1ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerHider: {fileID: 0}
 --- !u!1 &7790822750423594265
 GameObject:
   m_ObjectHideFlags: 0

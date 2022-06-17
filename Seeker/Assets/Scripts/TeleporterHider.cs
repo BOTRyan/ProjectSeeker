@@ -20,22 +20,23 @@ public class TeleporterHider : StarterAssets.PlayerController
     {
         base.Update();
 
-        if (_input.interact)
+        if (input.interact)
         {
+
             if (teleportMarker != null)
             {
-                _controller.enabled = false;
+                controller.enabled = false;
                 transform.position = teleportMarker.transform.position;
-                transform.rotation = teleportMarker.transform.rotation;
+                transform.rotation = Quaternion.Euler(0f, teleportMarker.transform.rotation.y, teleportMarker.transform.rotation.z);
                 Destroy(teleportMarker);
-                _controller.enabled = true;
+                controller.enabled = true;
             }
             else
             {
-                teleportMarker = Instantiate(markerPrefab, transform.position, transform.rotation, null);
+                if (Grounded) teleportMarker = Instantiate(markerPrefab, transform.position, Quaternion.Euler(-90f, transform.rotation.y, transform.rotation.z), null);
             }
 
-            _input.interact = false;
+            input.interact = false;
         }
     }
 }
