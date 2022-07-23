@@ -3,6 +3,9 @@ using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
+using Mirror;
+using UnityEngine.SceneManagement;
+using Cinemachine;
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
@@ -13,7 +16,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : NetworkBehaviour
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -70,6 +73,7 @@ namespace StarterAssets
         protected float cinemachineTargetPitch;
 
         // player
+        public GameObject playerModel;
         protected float speed;
         protected float animationBlend;
         protected float targetRotation = 0.0f;
@@ -93,19 +97,25 @@ namespace StarterAssets
         protected CharacterController controller;
         protected StarterAssetsInputs input;
         public GameObject mainCamera;
+        protected CinemachineVirtualCamera cinemachineFollow;
 
         protected const float threshold = 0.01f;
 
         protected bool hasAnimator;
 
+        protected bool inGame = false;
+
         protected bool IsCurrentDeviceMouse => playerInput.currentControlScheme == "KeyboardMouse";
 
         public virtual void Start()
         {
+            GetComponent<CharacterController>().enabled = false;
+            playerModel.SetActive(false);
             hasAnimator = TryGetComponent(out animator);
             controller = GetComponent<CharacterController>();
             input = GetComponent<StarterAssetsInputs>();
             playerInput = GetComponent<PlayerInput>();
+            animator.enabled = false;
 
             AssignAnimationIDs();
 
@@ -114,12 +124,50 @@ namespace StarterAssets
             fallTimeoutDelta = FallTimeout;
         }
 
+        public virtual void SetPosition()
+        {
+            transform.position = new Vector3(UnityEngine.Random.Range(-5f, 5f), 0, UnityEngine.Random.Range(-5f, 5f));
+        }
+
         public virtual void Update()
         {
-            hasAnimator = TryGetComponent(out animator);
-            JumpAndGravity();
-            GroundedCheck();
-            Move();
+            if (!inGame)
+            {
+                if (SceneManager.GetActiveScene().name == "Game")
+                {
+                    if (playerModel.activeSelf == false)
+                    {
+                        playerModel.SetActive(true);
+                        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+                        cinemachineFollow = GameObject.FindGameObjectWithTag("CinemachineFollow").GetComponent<CinemachineVirtualCamera>();
+                        cinemachineFollow.Follow = CinemachineCameraTarget.transform;
+                        cinemachineFollow.LookAt = CinemachineCameraTarget.transform;
+                        SetPosition();
+                        Cursor.lockState = CursorLockMode.Locked;
+                        hasAnimator = TryGetComponent(out animator);
+                        animator.enabled = true;
+                        GetComponent<CharacterController>().enabled = true;
+                        inGame = true;
+                    }
+                }
+            }
+            else
+            {
+
+            }
+        }
+
+        public virtual void FixedUpdate()
+        {
+            if (inGame)
+            {
+                if (hasAuthority)
+                {
+                    JumpAndGravity();
+                    GroundedCheck();
+                    Move();
+                }
+            }
         }
 
         public virtual void LateUpdate()

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - Hider
+  - CinemachineFollow
   layers:
   - Default
   - TransparentFX

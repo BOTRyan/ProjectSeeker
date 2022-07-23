@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 /// <summary>
 /// This class extends PlayerController
@@ -33,5 +34,15 @@ public class DecoyHider : StarterAssets.PlayerController
 
             input.interact = false;
         }
+    }
+
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
+
+    public override void LateUpdate()
+    {
+        base.LateUpdate();
     }
 }
