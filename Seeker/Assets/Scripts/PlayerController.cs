@@ -96,8 +96,11 @@ namespace StarterAssets
         protected Animator animator;
         protected CharacterController controller;
         protected StarterAssetsInputs input;
+
         public GameObject mainCamera;
-        public CinemachineVirtualCamera cinemachineFollow;
+        protected CinemachineBrain cameraBrain;
+        public GameObject cinemachineFollow;
+        protected CinemachineVirtualCamera cameraFollow;
 
         protected const float threshold = 0.01f;
 
@@ -133,9 +136,18 @@ namespace StarterAssets
         {
             base.OnStartAuthority();
 
-
             UnityEngine.InputSystem.PlayerInput playerInput = GetComponent<UnityEngine.InputSystem.PlayerInput>();
             playerInput.enabled = true;
+
+            mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+
+            cameraBrain = mainCamera.GetComponent<CinemachineBrain>();
+
+            cinemachineFollow = GameObject.FindGameObjectWithTag("CinemachineFollow");
+            cameraFollow = cinemachineFollow.GetComponent<CinemachineVirtualCamera>();
+
+            cameraFollow.enabled = true;
+            cameraBrain.enabled = true;
         }
 
         public virtual void Update()
@@ -146,15 +158,12 @@ namespace StarterAssets
                 {
                     if (playerModel.activeSelf == false)
                     {
-                        mainCamera = Instantiate(PrefabManager.instance.cameraPrefab, null);
-                        cinemachineFollow = Instantiate(PrefabManager.instance.cameraFollowPrefab, null).GetComponent<CinemachineVirtualCamera>();
-
                         playerModel.SetActive(true);
-
-                        cinemachineFollow.Follow = CinemachineCameraTarget.transform;
-                        cinemachineFollow.LookAt = CinemachineCameraTarget.transform;
-
                         SetPosition();
+
+                        cameraFollow.Follow = CinemachineCameraTarget.transform;
+                        cameraFollow.LookAt = CinemachineCameraTarget.transform;
+
                         Cursor.lockState = CursorLockMode.Locked;
                         hasAnimator = TryGetComponent(out animator);
                         animator.enabled = true;
@@ -162,10 +171,6 @@ namespace StarterAssets
                         inGame = true;
                     }
                 }
-            }
-            else
-            {
-
             }
         }
 
