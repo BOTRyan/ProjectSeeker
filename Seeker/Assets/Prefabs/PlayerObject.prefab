@@ -1289,6 +1289,9 @@ MonoBehaviour:
   mouseSensitivity: 2
   playerModel: {fileID: 600364908446404049}
   mainCamera: {fileID: 0}
+  mainCameraPrefab: {fileID: 10580655391396198, guid: bdfa034f10a3cd54fa5baddd858abcef, type: 3}
+  cinemachineFollow: {fileID: 0}
+  cinemachineFollowPrefab: {fileID: 1342899154474099561, guid: 6fe6d96097bf7224891327452ca94542, type: 3}
   decoyPrefab: {fileID: 7758872096563197796, guid: 4056d79e3d519e14282ca2bb327eae2d, type: 3}
 --- !u!114 &134963693218838472
 MonoBehaviour:

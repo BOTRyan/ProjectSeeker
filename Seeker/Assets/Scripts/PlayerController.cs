@@ -97,7 +97,7 @@ namespace StarterAssets
         protected CharacterController controller;
         protected StarterAssetsInputs input;
         public GameObject mainCamera;
-        protected CinemachineVirtualCamera cinemachineFollow;
+        public CinemachineVirtualCamera cinemachineFollow;
 
         protected const float threshold = 0.01f;
 
@@ -133,6 +133,7 @@ namespace StarterAssets
         {
             base.OnStartAuthority();
 
+
             UnityEngine.InputSystem.PlayerInput playerInput = GetComponent<UnityEngine.InputSystem.PlayerInput>();
             playerInput.enabled = true;
         }
@@ -145,11 +146,14 @@ namespace StarterAssets
                 {
                     if (playerModel.activeSelf == false)
                     {
+                        mainCamera = Instantiate(PrefabManager.instance.cameraPrefab, null);
+                        cinemachineFollow = Instantiate(PrefabManager.instance.cameraFollowPrefab, null).GetComponent<CinemachineVirtualCamera>();
+
                         playerModel.SetActive(true);
-                        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-                        cinemachineFollow = GameObject.FindGameObjectWithTag("CinemachineFollow").GetComponent<CinemachineVirtualCamera>();
+
                         cinemachineFollow.Follow = CinemachineCameraTarget.transform;
                         cinemachineFollow.LookAt = CinemachineCameraTarget.transform;
+
                         SetPosition();
                         Cursor.lockState = CursorLockMode.Locked;
                         hasAnimator = TryGetComponent(out animator);
