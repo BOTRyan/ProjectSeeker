@@ -129,6 +129,14 @@ namespace StarterAssets
             transform.position = new Vector3(UnityEngine.Random.Range(-5f, 5f), 0, UnityEngine.Random.Range(-5f, 5f));
         }
 
+        public override void OnStartAuthority()
+        {
+            base.OnStartAuthority();
+
+            UnityEngine.InputSystem.PlayerInput playerInput = GetComponent<UnityEngine.InputSystem.PlayerInput>();
+            playerInput.enabled = true;
+        }
+
         public virtual void Update()
         {
             if (!inGame)
