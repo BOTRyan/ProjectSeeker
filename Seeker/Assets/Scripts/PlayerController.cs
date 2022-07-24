@@ -148,6 +148,9 @@ namespace StarterAssets
 
             cameraFollow.enabled = true;
             cameraBrain.enabled = true;
+
+            cameraFollow.Follow = CinemachineCameraTarget.transform;
+            cameraFollow.LookAt = CinemachineCameraTarget.transform;
         }
 
         public virtual void Update()
@@ -160,9 +163,6 @@ namespace StarterAssets
                     {
                         playerModel.SetActive(true);
                         SetPosition();
-
-                        cameraFollow.Follow = CinemachineCameraTarget.transform;
-                        cameraFollow.LookAt = CinemachineCameraTarget.transform;
 
                         Cursor.lockState = CursorLockMode.Locked;
                         hasAnimator = TryGetComponent(out animator);
